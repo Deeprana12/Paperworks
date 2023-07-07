@@ -64,7 +64,7 @@ const Register = () => {
         dispatch(setName(formData.name));
         navigate('/');
       } else {        
-        console.error('Registration failed');
+        alert('Registration failed');
       }
     }
   };
