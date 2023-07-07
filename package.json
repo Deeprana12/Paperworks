@@ -1,8 +1,7 @@
 {
   "name": "app",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "/login",
+  "private": true,  
   "proxy": "http://localhost:3000",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
