@@ -17,7 +17,7 @@ const MyPdf = () => {
 
   useEffect(() => { 
     const getMyPdfs = async () => {
-      const response = await fetch('/api/pdf/my', {
+      const response = await fetch(`${BASE_URL}/api/pdf/my`, {
         method: 'GET', 
         headers: {
           'Content-Type': 'application/json',

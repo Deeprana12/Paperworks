@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken, setEmail, setName } from '../utils/slices/authSlice';
 import { useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../constants';
 
 const LoginForm = () => {
 
@@ -32,7 +33,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {    
     e.preventDefault()
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch(`${BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

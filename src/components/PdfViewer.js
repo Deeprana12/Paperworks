@@ -38,7 +38,7 @@ const PdfViewer = () => {
   
   const getComments = async () => {
     try{
-      const response = await fetch(`/api/pdf/comments/${pdfUrl}`,{
+      const response = await fetch(`${BASE_URL}/api/pdf/comments/${pdfUrl}`,{
         method:'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const PdfViewer = () => {
 
   const submitComment = async() =>{
     try{
-        const response = await fetch(`/api/pdf/comments/${state._id}`,{
+        const response = await fetch(`${BASE_URL}/api/pdf/comments/${state._id}`,{
           method:'POST',
           headers: {
             'Content-Type': 'application/json',

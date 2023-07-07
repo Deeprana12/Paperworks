@@ -10,7 +10,7 @@ const SharedContainer = () => {
   useEffect(() => {    
 
     const getAllPDF = async () => {
-        const response = await fetch('/api/pdf/all', {
+        const response = await fetch(`${BASE_URL}/api/pdf/all`, {
           method: 'GET', 
           headers: {
             'Content-Type': 'application/json',

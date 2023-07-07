@@ -23,7 +23,7 @@ const MainContainer = () => {
   const { isModalOpen, modalProp, openModal, closeModal } = useModal();
 
   const getAllPDF = async () => {
-    const response = await fetch('/api/pdf/all', {
+    const response = await fetch(`${BASE_URL}/api/pdf/all`, {
       method: 'GET', 
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const MainContainer = () => {
   };
 
   const uploadFile = async () => {
-    const response = await fetch('/api/pdf/upload', {
+    const response = await fetch(`${BASE_URL}/api/pdf/upload`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -47,7 +47,7 @@ const Register = () => {
       setPasswordError("Passwords don't match!");
     } else {      
       setPasswordError("");      
-      const response = await fetch('/api/auth/signup', {
+      const response = await fetch(`${BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

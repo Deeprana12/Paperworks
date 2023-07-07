@@ -12,7 +12,7 @@ const Modal = ({ isOpen, onClose, pdf }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`/api/pdf/share/${pdf._id}`, {
+    const response = await fetch(`${BASE_URL}/api/pdf/share/${pdf._id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
