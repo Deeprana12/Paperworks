@@ -7,6 +7,7 @@ import useSearch from '../utils/customHooks/useSearch';
 import useModal from '../utils/customHooks/useModal';
 import Shimmer from '../utils/Shimmers/Shimmer'
 import { useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../constants';
 
 const MainContainer = () => {
 

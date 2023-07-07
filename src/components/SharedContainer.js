@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Pdfs from './Pdfs'
+import { BASE_URL } from '../constants';
 
 const SharedContainer = () => {
 

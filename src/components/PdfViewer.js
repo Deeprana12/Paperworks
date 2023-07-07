@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import Comments from './Comments';
 import ShimmerComment from '../utils/Shimmers/ShimmerComment';
+import { BASE_URL } from '../constants';
 
 const b64toBlob = (pdfData, contentType='', sliceSize=512) => {
     const byteCharacters = atob(pdfData);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEmail, setName, setToken } from '../utils/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../constants';
 
 const Register = () => {    
 
