@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Comments from './Comments';
 import ShimmerComment from '../utils/Shimmers/ShimmerComment';
 import { BASE_URL } from '../constants';
@@ -28,6 +28,7 @@ const b64toBlob = (pdfData, contentType='', sliceSize=512) => {
 const PdfViewer = () => { 
 
   const location = useLocation();
+  const navigate = useNavigate()
   const pdfUrl = useParams().id
 
   const { state } = location;  
@@ -70,27 +71,31 @@ const PdfViewer = () => {
       if(response.ok){        
         const data = await response.json()
         const contentType = 'application/pdf';
-        console.log(data)
         const blob = b64toBlob(data?.pdf?.fileData, contentType);
         setBlobUrl(URL.createObjectURL(blob))
         setLoading(false)         
       } else {
         alert('Something went wrong!');
       }
-
       setNewComment("")
     }catch(e){
       console.log(e)
     }
   }
 
+  const token = useSelector(store => store.auth.token)       
+
   useEffect(() => {
-    getPdf()
-    getComments()
+    if(!token){
+      navigate('/login')      
+      return;
+    }
+      getPdf()
+      getComments()
   }, [])
           
   const [newComment, setNewComment] = useState('');    
-  const token = useSelector(store => store.auth.token)  
+ 
 
   const submitComment = async() =>{
     try{
