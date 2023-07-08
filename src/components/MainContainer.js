@@ -104,7 +104,7 @@ const MainContainer = () => {
         </div>
         <div className='block text-center'>
           <h1 className='text-2xl text-bold mt-10'>Files you have access to</h1>      
-          <div className={filteredData.length == 0 ? 'flex flex-wrap justify-center' : 'flex flex-wrap justify-start'}>
+          <div className={filteredData.length === 0 ? 'flex flex-wrap justify-center' : 'flex flex-wrap justify-start'}>
             {!loading ?        
               (filteredData.length ? filteredData.map((pdf) => {                    
                 return (

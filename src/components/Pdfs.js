@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import pdfThumbnail from '../assets/pdf-thumbnail.png';
 import { Link } from 'react-router-dom';
 

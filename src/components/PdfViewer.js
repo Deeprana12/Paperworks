@@ -30,11 +30,9 @@ const PdfViewer = () => {
   const location = useLocation();
   const pdfUrl = useParams().id
 
-  const { state } = location;                    
-  const pdfData = state.fileData 
+  const { state } = location;  
   const [comments, setComments] = useState([])
-  const [loading, setLoading] = useState(true)  
-  const [loadingPdf, setLoadingPdf] = useState(true)
+  const [loading, setLoading] = useState(true)    
   const [blobUrl, setBlobUrl] = useState('')  
   
   const getComments = async () => {
@@ -60,11 +58,34 @@ const PdfViewer = () => {
     }
   }
 
+  const getPdf = async () => {
+    try{
+      const response = await fetch(`${BASE_URL}/api/pdf/${pdfUrl}`,{
+        method:'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, 
+        },              
+      })        
+      if(response.ok){        
+        const data = await response.json()
+        const contentType = 'application/pdf';
+        console.log(data)
+        const blob = b64toBlob(data?.pdf?.fileData, contentType);
+        setBlobUrl(URL.createObjectURL(blob))
+        setLoading(false)         
+      } else {
+        alert('Something went wrong!');
+      }
+
+      setNewComment("")
+    }catch(e){
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
-    const contentType = 'application/pdf';
-    const blob = b64toBlob(pdfData, contentType);
-    setBlobUrl(URL.createObjectURL(blob))
-    if(blobUrl) setLoadingPdf(false)
+    getPdf()
     getComments()
   }, [])
           
@@ -99,7 +120,6 @@ const PdfViewer = () => {
            <iframe
             className='h-full w-full'
             src={blobUrl}
-            title={state.filename}
           ></iframe>
         </div>
         <div className='md:w-[40%] sm:w-full m-4'>
