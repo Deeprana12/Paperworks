@@ -18,7 +18,7 @@ const Shared = () => {
 
   useEffect(() => { 
     const getSharedPdf = async () => {
-      const response = await fetch(`${BASE_URL}/api/pdf/shared`, {
+      const response = await fetch(`${BASE_URL}/api/sharedpdf`, {
         method: 'GET', 
         headers: {
           'Content-Type': 'application/json',
