@@ -67,14 +67,17 @@ const PdfViewer = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, 
         },              
-      })        
-      if(response.ok){        
-        const data = await response.json()
+      })
+      const data = await response.json()                   
+      if(response.status >= 400 && response.status < 500){
+          alert(data?.message)
+      }
+      else if(response.status >= 200 && response.status < 400){                
         const contentType = 'application/pdf';
         const blob = b64toBlob(data?.pdf?.fileData, contentType);
         setBlobUrl(URL.createObjectURL(blob))
-        setLoading(false)         
-      } else {
+        setLoading(false)
+      } else {        
         alert('Something went wrong!');
       }
       setNewComment("")
