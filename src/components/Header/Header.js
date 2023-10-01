@@ -13,6 +13,8 @@ const Header = () => {
   const dispatch = useDispatch();  
   const navigate = useNavigate()
 
+  const token = useSelector(store => store.auth.token)
+
   // const { searchTerm, handleSearch, suggestions } = useSearch();
 
   const toggleMenuHandler = () =>{
@@ -37,7 +39,7 @@ const Header = () => {
             <img className="h-7 mr-1 mt-3.5 rounded-full" alt="user_logo" src={user} />
             <button
               type="submit" className=" text-indigo-300 cursor-pointer my-2 px-2 rounded" onClick={logoutUser}>
-                Logout
+                {token ? <p>Logout</p> : <p onClick={()=>navigate('/login')}>Login</p>}
             </button>
         </div>    
     </div>

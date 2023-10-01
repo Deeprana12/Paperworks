@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 const Sidebar = () => {
     
     const location = useLocation();
+    const token = useSelector(store => store.auth.token)
     const isMenuOpen = useSelector((store)=>store.app.isMenuOpen)
     
     if(!isMenuOpen)

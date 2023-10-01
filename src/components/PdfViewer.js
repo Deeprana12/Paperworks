@@ -40,14 +40,15 @@ const PdfViewer = () => {
     try{
       const response = await fetch(`${BASE_URL}/api/pdf/comments/${pdfUrl}`,{
         method:'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, 
-        },              
+        // headers: {
+        //   'Content-Type': 'application/json',
+        //   'Authorization': `Bearer ${token}`, 
+        // },              
       })        
       if(response.ok){        
         const data = await response.json()
-        setComments(data.comments) 
+        console.log(data)
+        setComments(data?.comments) 
         setLoading(false)         
       } else {
         alert('Something went wrong!');
@@ -71,8 +72,8 @@ const PdfViewer = () => {
       const data = await response.json()                   
       if(response.status >= 400 && response.status < 500){
           alert(data?.message)
-      }
-      else if(response.status >= 200 && response.status < 400){                
+          navigate('/')
+      }else if(response.status >= 200 && response.status < 400){                
         const contentType = 'application/pdf';
         const blob = b64toBlob(data?.pdf?.fileData, contentType);
         setBlobUrl(URL.createObjectURL(blob))
@@ -89,12 +90,12 @@ const PdfViewer = () => {
   const token = useSelector(store => store.auth.token)       
 
   useEffect(() => {
-    if(!token){
-      navigate('/login')      
-      return;
-    }
-      getPdf()
-      getComments()
+    // if(!token){
+    //   navigate('/login')      
+    //   return;
+    // }
+    getPdf()
+    getComments()
   }, [])
           
   const [newComment, setNewComment] = useState('');    
@@ -134,6 +135,8 @@ const PdfViewer = () => {
           <div className='text-3xl text-bold'>
             Comments
           </div>
+          {(!token ? <h1 className='mt-8 text-center font-bold text-xl'>Please authenticate to see comments!</h1> :
+          (<>
           <div className='my-2'>
             <h3> Add your comment: </h3>
             <div className='flex my-3'>
@@ -146,9 +149,10 @@ const PdfViewer = () => {
             {!loading ? (comments.length?
               (comments.map((comment) => {
                 return (<Comments key={comment._id} comment={comment} />)
-              })):(<h1>No Comments!</h1>)) : <ShimmerComment/>
+              })):(<h1>No Comments!</h1>)): <ShimmerComment/>
             }
           </div>
+          </>))}
         </div>
       </div>
   )

@@ -10,10 +10,15 @@ const MyProfile = () => {
   const email = useSelector((store) => store.auth.email)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  
   const logoutUser = () => {
-      dispatch(clearAuth())
-      navigate('/login')
+    dispatch(clearAuth())
+    navigate('/login')
+  }
+  
+  const token = useSelector(store => store.auth.token)
+  if(!token){
+    return <p className='mt-20 text-center'>Please authenticate!</p>
   }
 
   return (

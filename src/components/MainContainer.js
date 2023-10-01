@@ -18,18 +18,18 @@ const MainContainer = () => {
   const [loading, setLoading] = useState(true)
 
   const token = useSelector(store => store.auth.token)
-  if(!token){
-    navigate('/login')
-  }
+  // if(!token){
+  //   navigate('/login')
+  // }
   const { isModalOpen, modalProp, openModal, closeModal } = useModal();
 
   const getAllPDF = async () => {
     const response = await fetch(`${BASE_URL}/api/pdf/all`, {
       method: 'GET', 
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, 
-      },
+      // headers: {
+      //   'Content-Type': 'application/json',
+      //   'Authorization': `Bearer ${token}`, 
+      // },
     });
     if (response.ok) {
       const data = await response.json(); 

@@ -11,9 +11,7 @@ import { BASE_URL } from '../constants';
 const MyPdf = () => {
 
   const [pdfs, setPdfs] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  const token = useSelector(store => store.auth.token)
+  const [loading, setLoading] = useState(true)  
   const { isModalOpen, modalProp, openModal, closeModal } = useModal();
 
   useEffect(() => { 
@@ -37,6 +35,11 @@ const MyPdf = () => {
   }, [])
 
   const { searchQuery, filteredData, handleSearch } = useSearch(pdfs);
+
+  const token = useSelector(store => store.auth.token)
+  if(!token){
+    return <p className='mt-20 text-center'>Please authenticate!</p>
+  }
 
   return (
     <>

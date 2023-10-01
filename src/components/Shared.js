@@ -12,9 +12,10 @@ const Shared = () => {
 
   const [pdfs, setPdfs] = useState([])
   const [loading, setLoading] = useState(true)
-
+  
   const token = useSelector(store => store.auth.token)
   const { isModalOpen, modalProp, openModal, closeModal } = useModal();
+  const { searchQuery, filteredData, handleSearch } = useSearch(pdfs);
 
   useEffect(() => { 
     const getSharedPdf = async () => {
@@ -35,10 +36,12 @@ const Shared = () => {
   }           
     getSharedPdf()    
   }, [])
-
-  const { searchQuery, filteredData, handleSearch } = useSearch(pdfs);
-
-  return (
+    
+  if(!token){
+    return <p className='mt-20 text-center'>Please authenticate!</p>
+  }
+  
+  return (    
     <>
       <div className='sm:mx-8 lg:mx-52 md:mx-20 mt-20 my-8 bg-white col-span-12'>
         <div className='block text-center'>
